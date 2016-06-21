@@ -1,9 +1,9 @@
 Unassigned Shards, how to fix?
 ==============================
-.. code-block:: json
+```bash
 curl -XPUT 'localhost:9200/_cluster/settings' -d '{
     "transient" : {
         "cluster.routing.allocation.enable" : "all"
     }
 }'
-::
+```

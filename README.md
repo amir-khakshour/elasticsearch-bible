@@ -1,5 +1,5 @@
 
-ES commands
+Elasticsearch Bible
 =======
 
-Commands to solve common ES issues.
+An easy to understand and use ElasticSearch book made by online resources, experiences.

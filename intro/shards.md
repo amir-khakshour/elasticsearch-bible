@@ -60,4 +60,10 @@ Since you have `"number_of_replicas":1`, the replicas cannot be assigned anymore
 
 As soon as the node that had left is back up, it'll join the cluster again and the replicas will be assigned again. The existing shard on the second node can be loaded but they need to be synchronized with the other shards, as write operations most likely happened while the node was down. At the end of this operation the cluster status will become `GREEN`.
 
+###### summary
+* An index is broken into shards in order to distribute them and scale.
+* Replicas are copies of the shards.
+* A node is a running instance of elasticsearch which belongs to a cluster.
+* A cluster consists of one or more nodes which share the same cluster name. Each cluster has a single master node which is chosen automatically by the cluster and which can be replaced if the current master node fails.
+
 Source: [shards-and-replicas-in-elasticsearch](http://stackoverflow.com/questions/15694724/shards-and-replicas-in-elasticsearch)

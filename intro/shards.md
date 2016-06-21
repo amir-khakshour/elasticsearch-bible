@@ -60,6 +60,16 @@ Since you have `"number_of_replicas":1`, the replicas cannot be assigned anymore
 
 As soon as the node that had left is back up, it'll join the cluster again and the replicas will be assigned again. The existing shard on the second node can be loaded but they need to be synchronized with the other shards, as write operations most likely happened while the node was down. At the end of this operation the cluster status will become `GREEN`.
 
+###### How many shards and replicas do i need?
+
+How many shards and replicas you use really depends on your data, the way you access them and the number of available nodes/servers. It's best practice to overallocate shards a little in order to redistribute them in case you add more nodes to your cluster, **since you can't (for now) change the number of shards once you created the index**. Otherwise you can always change the number of shards if you are willing to do a complete reindex of your data.
+
+Every additional shard comes with a cost since each shard is effectively a Lucene instance. The maximum number of shards that you can have per machine really depends on the hardware available and your data as well. Good to know that having 100 indexes with each one shard or one index with 100 shards is really the same since you'd have 100 lucene instances in both cases.
+
+Of course at query time if you want to query a single elasticsearch index composed of 100 shards elasticsearch would need to query them all in order to get proper results (unless you used a specific routing for your documents to then query only a specific shard). This would have a performance cost.
+
+You can easily check the state of your cluster and nodes using the [Cluster Nodes Info API][2] through which you can check a lot of useful information, all you need in order to know whether your nodes are running smoothly or not. Even easier, there are a couple of plugins to check those information through a nice user interface (which internally uses the elasticsearch APIs anyway): [paramedic][3] and [bigdesk][4].
+
 ###### summary
 - **Node**: an Elasticsearch instance running (a java process). Usually every node runs on its own machine.
 - **Cluster**: one or more nodes with the same cluster name.

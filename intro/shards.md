@@ -60,7 +60,7 @@ Since you have `"number_of_replicas":1`, the replicas cannot be assigned anymore
 
 As soon as the node that had left is back up, it'll join the cluster again and the replicas will be assigned again. The existing shard on the second node can be loaded but they need to be synchronized with the other shards, as write operations most likely happened while the node was down. At the end of this operation the cluster status will become `GREEN`.
 
-###### How many shards and replicas do i need?
+### How many shards and replicas do i need?
 
 How many shards and replicas you use really depends on your data, the way you access them and the number of available nodes/servers. It's best practice to overallocate shards a little in order to redistribute them in case you add more nodes to your cluster, **since you can't (for now) change the number of shards once you created the index**. Otherwise you can always change the number of shards if you are willing to do a complete reindex of your data.
 
